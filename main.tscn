@@ -1,0 +1,243 @@
+[gd_scene format=3 uid="uid://c7fsfwltpa0pg"]
+
+[ext_resource type="Script" uid="uid://cnrox86lmbx17" path="res://main.gd" id="0_m41ng"]
+[ext_resource type="Texture2D" uid="uid://c8uesb6xot01g" path="res://Material Duck Hunt/cenariofrente.png" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://beymat4bhv6uw" path="res://chao.tscn" id="2_lquwl"]
+[ext_resource type="PackedScene" uid="uid://c2mc08emyquh8" path="res://alvo.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bflh61ibroc1c" path="res://topo.tscn" id="5_7mycd"]
+[ext_resource type="Texture2D" uid="uid://b62b56qqy0xjp" path="res://Material Duck Hunt/cao/captura.png" id="6_272bh"]
+[ext_resource type="Texture2D" uid="uid://b7r6gfp26pjax" path="res://Material Duck Hunt/cao/rindo.png" id="7_5vw27"]
+[ext_resource type="Texture2D" uid="uid://spowbbdklem0" path="res://Material Duck Hunt/hud.png" id="8_kek77"]
+[ext_resource type="FontFile" uid="uid://drmh7a577tnh5" path="res://Material Duck Hunt/PressStart2P.ttf" id="9_4c57u"]
+[ext_resource type="AudioStream" uid="uid://4rcvidwf8exy" path="res://Material Duck Hunt/sons/cao_captura.wav" id="9_ycdy4"]
+[ext_resource type="AudioStream" uid="uid://52i238qxpjf5" path="res://Material Duck Hunt/sons/cao_rindo.wav" id="10_w48qg"]
+[ext_resource type="AudioStream" uid="uid://c7qostyfsbgst" path="res://Material Duck Hunt/sons/colidiu.wav" id="11_vivmo"]
+[ext_resource type="AudioStream" uid="uid://cinmafeex6p66" path="res://Material Duck Hunt/sons/flyaway.wav" id="12_2cqfq"]
+[ext_resource type="AudioStream" uid="uid://ej7mpmhpd2af" path="res://Material Duck Hunt/sons/round.wav" id="13_yaehf"]
+[ext_resource type="Texture2D" path="res://Material Duck Hunt/coracao_cheio.png" id="14_coracaocheio"]
+[ext_resource type="Texture2D" path="res://Material Duck Hunt/coracao_vazio.png" id="15_coracaovazio"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1bvp3"]
+load_path = "res://.godot/imported/cenariotras.png-2a2b83ddcd9cf31f8a8662e3c442e645.ctex"
+
+[sub_resource type="Animation" id="Animation_kek77"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("captura:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(388, 613)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("rindo:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(398, 581)]
+}
+
+[sub_resource type="Animation" id="Animation_4c57u"]
+resource_name = "captura"
+length = 3.0000000000000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("captura:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(388, 613), Vector2(380, 422), Vector2(381, 606)]
+}
+
+[sub_resource type="Animation" id="Animation_272bh"]
+resource_name = "rindo"
+length = 3.0000000000000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("rindo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(398, 581), Vector2(398, 422), Vector2(400, 599)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_efxa6"]
+_data = {
+&"RESET": SubResource("Animation_kek77"),
+&"captura": SubResource("Animation_4c57u"),
+&"rindo": SubResource("Animation_272bh")
+}
+
+[node name="Main" type="Node2D" unique_id=431857115]
+script = ExtResource("0_m41ng")
+
+[node name="chao" parent="." unique_id=2081408007 instance=ExtResource("2_lquwl")]
+position = Vector2(352, 802)
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=914315171]
+z_index = -3
+texture = SubResource("CompressedTexture2D_1bvp3")
+centered = false
+
+[node name="Sprite2" type="Sprite2D" parent="." unique_id=1150570187]
+z_index = 1
+texture = ExtResource("1_0xm2m")
+centered = false
+
+[node name="Alvo" parent="." unique_id=1045938314 instance=ExtResource("3_h2yge")]
+position = Vector2(0, 2)
+
+[node name="gerapato" type="Timer" parent="." unique_id=360733091]
+one_shot = true
+
+[node name="espera" type="Timer" parent="." unique_id=946037997]
+wait_time = 4.0
+one_shot = true
+
+[node name="topo" parent="." unique_id=1089908029 instance=ExtResource("5_7mycd")]
+position = Vector2(364, -66)
+
+[node name="captura" type="Sprite2D" parent="." unique_id=1443730813]
+position = Vector2(388, 613)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_272bh")
+
+[node name="rindo" type="Sprite2D" parent="." unique_id=27773837]
+position = Vector2(398, 581)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_5vw27")
+
+[node name="cao" type="AnimationPlayer" parent="." unique_id=723852169]
+libraries/ = SubResource("AnimationLibrary_efxa6")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1882303027]
+
+[node name="Sprite2D" type="Sprite2D" parent="HUD" unique_id=1841123076]
+position = Vector2(394, 617)
+texture = ExtResource("8_kek77")
+
+[node name="Label" type="Label" parent="HUD" unique_id=1034817113]
+offset_left = 366.0
+offset_top = 599.0
+offset_right = 423.0
+offset_bottom = 635.0
+theme_override_fonts/font = ExtResource("9_4c57u")
+theme_override_font_sizes/font_size = 19
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Vida1" type="Sprite2D" parent="HUD"]
+position = Vector2(35, 35)
+texture = ExtResource("14_coracaocheio")
+
+[node name="Vida2" type="Sprite2D" parent="HUD"]
+position = Vector2(80, 35)
+texture = ExtResource("14_coracaocheio")
+
+[node name="Vida3" type="Sprite2D" parent="HUD"]
+position = Vector2(125, 35)
+texture = ExtResource("14_coracaocheio")
+
+[node name="cao_captura" type="AudioStreamPlayer2D" parent="." unique_id=555172352]
+stream = ExtResource("9_ycdy4")
+
+[node name="cao_rindo" type="AudioStreamPlayer2D" parent="." unique_id=1739119273]
+stream = ExtResource("10_w48qg")
+
+[node name="colidiu" type="AudioStreamPlayer2D" parent="." unique_id=1846295698]
+stream = ExtResource("11_vivmo")
+
+[node name="flyaway" type="AudioStreamPlayer2D" parent="." unique_id=1642824781]
+stream = ExtResource("12_2cqfq")
+
+[node name="novo_turno" type="AudioStreamPlayer2D" parent="." unique_id=1460932864]
+stream = ExtResource("13_yaehf")
+
+[node name="TelaInicio" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Fundo" type="ColorRect" parent="TelaInicio"]
+offset_right = 768.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.6)
+
+[node name="Titulo" type="Label" parent="TelaInicio"]
+offset_left = 184.0
+offset_top = 90.0
+offset_right = 584.0
+offset_bottom = 140.0
+theme_override_fonts/font = ExtResource("9_4c57u")
+theme_override_font_sizes/font_size = 28
+text = "DUCK HUNT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NomeInput" type="LineEdit" parent="TelaInicio"]
+offset_left = 234.0
+offset_top = 180.0
+offset_right = 534.0
+offset_bottom = 216.0
+theme_override_fonts/font = ExtResource("9_4c57u")
+theme_override_font_sizes/font_size = 14
+placeholder_text = "Seu nome"
+alignment = 1
+max_length = 16
+
+[node name="BotaoComecar" type="Button" parent="TelaInicio"]
+offset_left = 284.0
+offset_top = 240.0
+offset_right = 484.0
+offset_bottom = 290.0
+theme_override_fonts/font = ExtResource("9_4c57u")
+theme_override_font_sizes/font_size = 16
+text = "Começar"
+
+[node name="RankTitulo" type="Label" parent="TelaInicio"]
+offset_left = 184.0
+offset_top = 330.0
+offset_right = 584.0
+offset_bottom = 360.0
+theme_override_fonts/font = ExtResource("9_4c57u")
+theme_override_font_sizes/font_size = 14
+text = "MELHORES"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible = false
+
+[node name="RankLabel" type="Label" parent="TelaInicio"]
+offset_left = 184.0
+offset_top = 365.0
+offset_right = 584.0
+offset_bottom = 480.0
+theme_override_fonts/font = ExtResource("9_4c57u")
+theme_override_font_sizes/font_size = 13
+theme_override_constants/line_spacing = 10
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 0
+visible = false
+
+[connection signal="body_entered" from="chao" to="." method="_on_chao_body_entered"]
+[connection signal="timeout" from="gerapato" to="." method="_on_gerapato_timeout"]
+[connection signal="timeout" from="espera" to="." method="_on_espera_timeout"]
+[connection signal="body_entered" from="topo" to="." method="_on_topo_body_entered"]
+[connection signal="pressed" from="TelaInicio/BotaoComecar" to="." method="_on_comecar_pressed"]

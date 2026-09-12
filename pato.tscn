@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://cuddybm3h7m0k"]
+
+[ext_resource type="Script" uid="uid://c2knc866reuq3" path="res://pato.gd" id="1_ny35s"]
+[ext_resource type="Texture2D" uid="uid://ct6hu482idr2l" path="res://Material Duck Hunt/pato/cima/sprite_0.png" id="2_evpki"]
+[ext_resource type="Texture2D" uid="uid://by35rnjsbc4xj" path="res://Material Duck Hunt/pato/cima/sprite_1.png" id="3_5p5ea"]
+[ext_resource type="Texture2D" uid="uid://bfj17nqebtuvu" path="res://Material Duck Hunt/pato/cima/sprite_2.png" id="4_yvygc"]
+[ext_resource type="Texture2D" uid="uid://lk8o58mknmvd" path="res://Material Duck Hunt/pato/lado/sprite_0.png" id="5_030ok"]
+[ext_resource type="Texture2D" uid="uid://bxkrqtq14xm4f" path="res://Material Duck Hunt/pato/lado/sprite_1.png" id="6_ywi7w"]
+[ext_resource type="Texture2D" uid="uid://baru4yndyexxf" path="res://Material Duck Hunt/pato/lado/sprite_2.png" id="7_vw86d"]
+[ext_resource type="Texture2D" uid="uid://cakheiwjbdcmw" path="res://Material Duck Hunt/pato/morte/0.png" id="8_wwo8d"]
+[ext_resource type="Texture2D" uid="uid://cdy80tv3o6qd3" path="res://Material Duck Hunt/pato/morte/1.png" id="9_t6mnj"]
+[ext_resource type="Texture2D" uid="uid://dhbe7vc4x3gsa" path="res://Material Duck Hunt/pato/morte/2.png" id="10_kpn0u"]
+[ext_resource type="Texture2D" uid="uid://dpqfvni3tu5qu" path="res://Material Duck Hunt/pato/morte/3.png" id="11_qff7v"]
+[ext_resource type="Texture2D" uid="uid://b5yb2bqjkg7lt" path="res://Material Duck Hunt/pato/susto.png" id="12_f4ou3"]
+[ext_resource type="AudioStream" uid="uid://xo2idcj5mb8i" path="res://Material Duck Hunt/sons/pato.wav" id="13_evpki"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tsw3q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_evpki")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5p5ea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yvygc")
+}],
+"loop": 1,
+"name": &"cima",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_030ok")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ywi7w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vw86d")
+}],
+"loop": 1,
+"name": &"lado",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_wwo8d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_t6mnj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_kpn0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_qff7v")
+}],
+"loop": 1,
+"name": &"morte",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_f4ou3")
+}],
+"loop": 1,
+"name": &"susto",
+"speed": 7.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_urkku"]
+radius = 32.55764
+
+[node name="Pato" type="CharacterBody2D" unique_id=963855439]
+z_index = 5
+script = ExtResource("1_ny35s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=456509871]
+sprite_frames = SubResource("SpriteFrames_tsw3q")
+animation = &"cima"
+frame_progress = 0.91866195
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2004799688]
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_urkku")
+
+[node name="movimento" type="Timer" parent="." unique_id=1930356806]
+autostart = true
+
+[node name="anima" type="Timer" parent="." unique_id=1399452980]
+autostart = true
+
+[node name="morte" type="Timer" parent="." unique_id=2081184475]
+wait_time = 0.2
+
+[node name="audio" type="AudioStreamPlayer2D" parent="." unique_id=1886641043]
+stream = ExtResource("13_evpki")
+
+[node name="quack" type="Timer" parent="." unique_id=1851084144]
+autostart = true
+
+[connection signal="timeout" from="movimento" to="." method="_on_movimento_timeout"]
+[connection signal="timeout" from="anima" to="." method="_on_anima_timeout"]
+[connection signal="timeout" from="morte" to="." method="_on_morte_timeout"]
+[connection signal="timeout" from="quack" to="." method="_on_quack_timeout"]
